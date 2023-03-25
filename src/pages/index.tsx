@@ -68,14 +68,17 @@ export default function Home() {
               best price as per your requirements!
             </h2>
             <button className="border-blue-500 border-2 my-6 hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-500 transition-all ease-out duration-300 text-white font-bold py-2 px-10 rounded-full cursor-pointer">
-              Find Best Price!
+              <a href="#prediction">Find Best Price!</a>
             </button>
           </div>
           <div className="bottom_gradient bg-gradient-to-t from-black to-trasnparent absolute bottom-0 left-0 right-0 h-32"></div>
         </section>
 
         {/* Prediction Form */}
-        <section className="predictionForm flex md:flex-row flex-col-reverse items-center justify-around py-24 bg-black text-white">
+        <section
+          id="prediction"
+          className="predictionForm flex md:flex-row flex-col-reverse items-center justify-around py-24 bg-black text-white"
+        >
           <div className="prediction_value md:text-left md:my-0 my-5 text-center">
             <h1 className="text-4xl font-bold ">Predicted Price</h1>
             <h2 className="text-blue-500 text-4xl font-bold">₹ 10,000</h2>
