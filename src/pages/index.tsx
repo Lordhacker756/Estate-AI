@@ -19,8 +19,8 @@ export default function Home() {
       </Head>
       <main>
         {/* Header */}
-        <header className="flex justify-between bg-gradient-to-b from-black to-transparent px-16 py-4 absolute top-0 left-0 right-0 z-10">
-          <div className="header_left flex w-[50%] items-center gap-4">
+        <header className="flex justify-between bg-gradient-to-b from-black to-transparent px-10 py-4 absolute top-0 left-0 right-0 z-10">
+          <div className="header_left flex md:w-[50%] w-full justify-center md:justify-start items-center gap-4">
             <Image src={logo} alt="Estate AI" width={40} height={40} />
             <p
               className="text-white font-bold text-2xl
@@ -29,7 +29,7 @@ export default function Home() {
               Estate AI
             </p>
           </div>
-          <div className="header_right flex items-center justify-end gap-10 w-[50%]">
+          <div className="header_right md:flex hidden items-center justify-end gap-10 w-[50%]">
             <Link
               className="text-white text-lg hover:text-blue-500 hover:cursor-pointer"
               href="/"
@@ -53,7 +53,7 @@ export default function Home() {
 
         {/* Hero */}
         <section
-          className="hero flex py-24 items-center px-10 gap-4 h-[100vh] relative"
+          className="hero flex py-24 md:items-center items-end px-10 gap-4 md:h-[100vh] h-[70vh] relative"
           style={{
             backgroundImage: `url(${heroBg})`,
             backgroundSize: "cover",
@@ -62,11 +62,11 @@ export default function Home() {
           }}
         >
           <div className="heroLeft text-white">
-            <h1 className="text-6xl font-bold w-[65%] py-2">
+            <h1 className="md:text-6xl text-3xl font-bold md:w-[65%] md:py-2 py-4">
               Looking for the best rooms to rent in a{" "}
               <span className="text-blue-500">Metro City</span>?
             </h1>
-            <h2 className="text-xl w-[60%]">
+            <h2 className="text-xl md:w-[60%]">
               Use our AI Model trainded over lakhs of data points to find the
               best price as per your requirements!
             </h2>
@@ -78,16 +78,16 @@ export default function Home() {
         </section>
 
         {/* Prediction Form */}
-        <section className="predictionForm flex items-center justify-around py-24 bg-black text-white">
-          <div className="prediction_value">
+        <section className="predictionForm flex md:flex-row flex-col-reverse items-center justify-around py-24 bg-black text-white">
+          <div className="prediction_value md:text-left md:my-0 my-5 text-center">
             <h1 className="text-4xl font-bold ">Predicted Price</h1>
             <h2 className="text-blue-500 text-4xl font-bold">₹ 10,000</h2>
           </div>
-          <div className="prediction_form w-[50%] justify-center flex flex-col items-center">
+          <div className="prediction_form md:w-[50%] px-5 justify-center flex flex-col items-center">
             <h1 className="text-4xl font-bold text-center">
               Let the AI help you find the best rooms!
             </h1>
-            <p className="text-xl text-center w-[50%] my-4">
+            <p className="text-xl text-center md:w-[50%] md:my-4 mt-5 mb-8">
               Fill in the form below to get the best rooms as per your
               requirements
             </p>
@@ -209,6 +209,41 @@ export default function Home() {
             </form>
           </div>
         </section>
+
+        {/* Footer */}
+        <footer className="flex md:flex-row flex-col items-center justify-center gap-4 w-full py-5 bg-black">
+          <div className="flex items-center justify-center gap-2">
+            <h1 className="text-lg font-bold text-white">Made with ❤️ by</h1>
+            <h1 className="text-lg font-bold text-blue-500">
+              <a
+                href="https://www.linkedin.com/in/theutkarshmishra/"
+                target="_blank"
+              >
+                Utkarsh Mishra
+              </a>
+            </h1>
+          </div>
+          <div className="md:hidden flex items-center justify-evenly w-full">
+            <Link
+              className="text-white text-lg hover:text-blue-500 hover:cursor-pointer"
+              href="/"
+            >
+              <p>Home</p>
+            </Link>
+            <Link
+              className="text-white text-lg hover:text-blue-500 hover:cursor-pointer"
+              href="/about"
+            >
+              <p>About</p>
+            </Link>
+            <Link
+              className="text-white text-lg hover:text-blue-500 hover:cursor-pointer"
+              href="/about"
+            >
+              <p>GitHub</p>
+            </Link>
+          </div>
+        </footer>
       </main>
     </>
   );
