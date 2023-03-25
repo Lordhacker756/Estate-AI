@@ -2,8 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
-import logo from "../assets/logo.png";
-import heroBg from "../assets/hero.png";
+import logo from "../public/logo.png";
+import heroBg from "../public/hero.png";
 
 export default function Home() {
   return (
