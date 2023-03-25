@@ -2,9 +2,6 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
-import logo from "../../public/logo.png";
-import heroBg from "../../public/hero.png";
-
 export default function Home() {
   return (
     <>
@@ -21,7 +18,7 @@ export default function Home() {
         {/* Header */}
         <header className="flex justify-between bg-gradient-to-b from-black to-transparent px-10 py-4 absolute top-0 left-0 right-0 z-10">
           <div className="header_left flex md:w-[50%] w-full justify-center md:justify-start items-center gap-4">
-            <Image src={logo} alt="Estate AI" width={40} height={40} />
+            <Image src="/logo.png" alt="Estate AI" width={40} height={40} />
             <p
               className="text-white font-bold text-2xl
             "
@@ -55,7 +52,7 @@ export default function Home() {
         <section
           className="hero flex py-24 md:items-center items-end px-10 gap-4 md:h-[100vh] h-[70vh] relative"
           style={{
-            backgroundImage: `url(${heroBg})`,
+            backgroundImage: `url(/hero.png)`,
             backgroundSize: "cover",
             backgroundColor: "rgba(0,0,0,0.3)",
             backgroundBlendMode: "overlay",
