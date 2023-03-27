@@ -1,38 +1,70 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Estate AI 🏢🤖
+
+Estate AI is a full-stack application that uses machine learning to predict the approximate rent a user would need to pay for their requirement across major metro cities of India. The application is built on NextJS 13 and TailwindCSS for the frontend and uses TypeScript for robust code. The backend was initially built on FastAPI but later migrated to Flask for easier deployment.
+
+You can check the frontend of the site [Estate AI](https://estate-ai.vercel.app/)
+
+## Features
+
+- The application uses machine learning to predict the approximate rent a user would need to pay for their requirement.
+- The model is trained using Scikit-Learn and with Random Forest Regressor Algorithm with 89% Accuracy.
+- The frontend is built on NextJS 13 and TailwindCSS and uses TypeScript for robust code.
+- The backend is built on Flask for easier deployment, previously it was on FastAPI
 
 ## Getting Started
 
-First, run the development server:
+To get started with the application, clone the repository to your local machine:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+### Frontend Setup
+
+- Clone the repository to your requried workspace using the command below
+
+```
+git clone https://github.com/Lordhacker756/Estate-AI
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Install the requirements using the command
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```
+npm install
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- Run the frontend with the code
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Backend Setup
 
-## Learn More
+**Note: As the model was too heavy to be deployed on any of the free backend hosting services, you need to run both the frontend and the backend in your system to test the app!**
 
-To learn more about Next.js, take a look at the following resources:
+- Clone the backend repository using the command below
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+git clone https://github.com/Lordhacker756/Estate-AI-Backend
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Install the requirements using the command
 
-## Deploy on Vercel
+```
+pip install -r requirements.txt
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Run the backend using the following command
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+flask  run --debug -h 0.0.0.0
+```
+
+## Contributing
+
+Contributions to the project are welcome. If you find any bugs or want to suggest improvements, please open an issue or submit a pull request.
+
+## Future Developments
+
+In the days to come,I'm also planning to develop a Mobile app for the same using React Native😄
+
+## License
+
+The project is licensed under the MIT License. See [LICENSE](LICENSE) for more information.

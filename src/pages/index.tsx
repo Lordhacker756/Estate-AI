@@ -1,8 +1,61 @@
+// use client
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+
+const getPredictions = async (e) => {
+  e.preventDefault();
+  const data = {
+    bedroom: 3.0,
+    layout_type: 0,
+    locality: 1,
+    area: 1234.9,
+    furnish_type: 2,
+    bathroom: 2.0,
+    city: 2,
+    agent: 0,
+    builder: 0,
+    owner: 1,
+    apartment: 0,
+    independent_floor: 0,
+    independent_house: 0,
+    penthouse: 1,
+    studio_apartment: 0,
+    villa: 0,
+  };
+  const res = await fetch("http://127.0.0.1:5000", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  const json = await res.json();
+  console.log(json);
+};
 
 export default function Home() {
+  const [prediction, setPrediction] = useState(0);
+  const [features, setFeatures] = useState({
+    bedroom: 0.0,
+    layout_type: 0,
+    locality: 0,
+    area: 0.0,
+    furnish_type: 0,
+    bathroom: 0.0,
+    city: 0,
+    agent: 0,
+    builder: 0,
+    owner: 0,
+    apartment: 0,
+    independent_floor: 0,
+    independent_house: 0,
+    penthouse: 0,
+    studio_apartment: 0,
+    villa: 0,
+  });
+
   return (
     <>
       <Head>
@@ -91,7 +144,12 @@ export default function Home() {
               Fill in the form below to get the best rooms as per your
               requirements
             </p>
-            <form className="flex flex-col items-center justify-center gap-4 w-full">
+            <form
+              onSubmit={(e) => {
+                getPredictions(e);
+              }}
+              className="flex flex-col items-center justify-center gap-4 w-full"
+            >
               <div className="group flex justify-between gap-10 w-full">
                 <div className="flex flex-col gap-2 w-[100%]">
                   <label className="text-lg font-bold">City</label>
