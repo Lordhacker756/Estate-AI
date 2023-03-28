@@ -1,4 +1,5 @@
 // use client
+// @ts-nocheck
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,7 +26,8 @@ export default function Home() {
     villa: 0,
   });
 
-  const getPredictions = async () => {
+  const getPredictions = async (e) => {
+    e.preventDefault();
     const data = features;
     console.log(features);
     const res = await fetch("http://127.0.0.1:5000", {
@@ -39,8 +41,11 @@ export default function Home() {
     console.log(json);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     // Set all the values properly
+
     // Call getPredictions function
   };
 
