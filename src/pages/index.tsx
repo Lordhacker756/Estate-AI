@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function Home() {
-  const [prediction, setPrediction] = useState(0);
+  const [prediction, setPrediction] = useState("Get Predictions!");
   const [features, setFeatures] = useState({
     bedroom: 0.0,
     layout_type: 0,
@@ -39,12 +39,11 @@ export default function Home() {
     });
     const json = await res.json();
     console.log(json);
+    setPrediction(json.prediction);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Set all the values properly
 
     // Call getPredictions function
   };
@@ -127,7 +126,9 @@ export default function Home() {
         >
           <div className="prediction_value md:text-left md:my-0 my-5 text-center">
             <h1 className="text-4xl font-bold ">Predicted Price</h1>
-            <h2 className="text-blue-500 text-4xl font-bold">₹ 10,000</h2>
+            <h2 className="text-blue-500 text-4xl font-bold">
+              ₹ {Math.ceil(prediction)}
+            </h2>
           </div>
           <div className="prediction_form md:w-[50%] px-5 justify-center flex flex-col items-center">
             <h1 className="text-4xl font-bold text-center">
@@ -147,11 +148,12 @@ export default function Home() {
                 <div className="flex flex-col gap-2 w-[100%]">
                   <label className="text-lg font-bold">City</label>
                   <select
+                    name="city"
                     value={features.property}
                     onChange={(e) =>
                       setFeatures({
                         ...features,
-                        [e.target.name]: 1,
+                        [e.target.name]: parseInt(e.target.value),
                       })
                     }
                     className="border-2 bg-gray-800 border-gray-600 p-2 rounded-lg focus:outline-none focus:border-blue-500"
@@ -169,21 +171,28 @@ export default function Home() {
                     <option value="7">Pune</option>
                   </select>
                 </div>
+
                 <div className="flex flex-col gap-2 w-[100%]">
                   <label className="text-lg font-bold">Seller</label>
                   <select
-                    value={features.city}
-                    onChange={(e) =>
+                    onChange={(e) => {
+                      console.log(e.target.selectedOptions[0].dataset.seller);
                       setFeatures({
                         ...features,
-                        [e.target.name]: 1,
-                      })
-                    }
+                        [e.target.selectedOptions[0].dataset.seller]: 1,
+                      });
+                    }}
                     className="border-2 bg-gray-800 border-gray-600 p-2 rounded-lg focus:outline-none focus:border-blue-500"
                   >
-                    <option value="Agent">Agent</option>
-                    <option value="Builder">Builder</option>
-                    <option value="Owner">Owner</option>
+                    <option value="Agent" data-seller="agent">
+                      Agent
+                    </option>
+                    <option value="Builder" data-seller="builder">
+                      Builder
+                    </option>
+                    <option value="Owner" data-seller="owner">
+                      Owner
+                    </option>
                   </select>
                 </div>
               </div>
@@ -290,7 +299,7 @@ export default function Home() {
                     onChange={(e) =>
                       setFeatures({
                         ...features,
-                        [e.target.name]: 1,
+                        [e.target.selectedOptions[0].dataset.property]: 1,
                       })
                     }
                     className="border-2 bg-gray-800 border-gray-600 p-2 rounded-lg focus:outline-none focus:border-blue-500"
@@ -300,11 +309,30 @@ export default function Home() {
                     </option>
                     Apartment Independent Floor Independent House Penthouse
                     Studio Apartment
-                    <option value="Apartment">Apartment</option>
-                    <option value="Independent House">Independent House</option>
-                    <option value="Independent Floor">Independent Floor</option>
-                    <option value="Penthouse">Penthouse</option>
-                    <option value="Studio Apartment">Studio Apartment</option>
+                    <option value="Apartment" data-property="apartment">
+                      Apartment
+                    </option>
+                    <option
+                      value="Independent House"
+                      data-property="independent_house"
+                    >
+                      Independent House
+                    </option>
+                    <option
+                      value="Independent Floor"
+                      data-property="independent_floor"
+                    >
+                      Independent Floor
+                    </option>
+                    <option value="Penthouse" data-property="penthouse">
+                      Penthouse
+                    </option>
+                    <option
+                      value="Studio Apartment"
+                      data-property="studio_apartment"
+                    >
+                      Studio Apartment
+                    </option>
                   </select>
                 </div>
                 <div className="flex flex-col gap-2 w-full">
