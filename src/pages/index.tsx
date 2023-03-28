@@ -4,46 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-const getPredictions = async (e) => {
-  e.preventDefault();
-  const data = {
-    bedroom: 3.0,
-    layout_type: 0,
-    locality: 1,
-    area: 1234.9,
-    furnish_type: 2,
-    bathroom: 2.0,
-    city: 2,
-    agent: 0,
-    builder: 0,
-    owner: 1,
-    apartment: 0,
-    independent_floor: 0,
-    independent_house: 0,
-    penthouse: 1,
-    studio_apartment: 0,
-    villa: 0,
-  };
-  const res = await fetch("http://127.0.0.1:5000", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  const json = await res.json();
-  console.log(json);
-};
-
 export default function Home() {
   const [prediction, setPrediction] = useState(0);
   const [features, setFeatures] = useState({
     bedroom: 0.0,
     layout_type: 0,
     locality: 0,
-    area: 0.0,
+    area: 0,
     furnish_type: 0,
-    bathroom: 0.0,
+    bathroom: 0,
     city: 0,
     agent: 0,
     builder: 0,
@@ -55,6 +24,29 @@ export default function Home() {
     studio_apartment: 0,
     villa: 0,
   });
+
+  const getPredictions = async (e) => {
+    e.preventDefault();
+    const data = features;
+    console.log(features);
+    const res = await fetch("http://127.0.0.1:5000", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const json = await res.json();
+    console.log(json);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Set all the values properly
+
+    // Call getPredictions function
+  };
 
   return (
     <>
@@ -153,33 +145,60 @@ export default function Home() {
               <div className="group flex justify-between gap-10 w-full">
                 <div className="flex flex-col gap-2 w-[100%]">
                   <label className="text-lg font-bold">City</label>
-                  <select className="border-2 bg-gray-800 border-gray-600 p-2 rounded-lg focus:outline-none focus:border-blue-500">
+                  <select
+                    value={features.property}
+                    onChange={(e) =>
+                      setFeatures({
+                        ...features,
+                        [e.target.name]: 1,
+                      })
+                    }
+                    className="border-2 bg-gray-800 border-gray-600 p-2 rounded-lg focus:outline-none focus:border-blue-500"
+                  >
                     <option value="Select" disabled selected>
                       Select
                     </option>
-                    <option value="Delhi">Delhi</option>
-                    <option value="Mumbai">Mumbai</option>
-                    <option value="Bangalore">Bangalore</option>
-                    <option value="Kolkata">Kolkata</option>
-                    <option value="Chennai">Chennai</option>
-                    <option value="Hyderabad">Hyderabad</option>
-                    <option value="Pune">Pune</option>
-                    <option value="Ahmedabad">Ahmedabad</option>
-                    <option value="Others">Others</option>
+                    <option value="0">Ahmedabad</option>
+                    <option value="1">Bangalore</option>
+                    <option value="2">Chennai</option>
+                    <option value="3">Delhi</option>
+                    <option value="4">Hyderabad</option>
+                    <option value="5">Kolkata</option>
+                    <option value="6">Mumbai</option>
+                    <option value="7">Pune</option>
                   </select>
                 </div>
                 <div className="flex flex-col gap-2 w-[100%]">
                   <label className="text-lg font-bold">Seller</label>
-                  <select className="border-2 bg-gray-800 border-gray-600 p-2 rounded-lg focus:outline-none focus:border-blue-500">
-                    <option value="Owner">Owner</option>
+                  <select
+                    value={features.city}
+                    onChange={(e) =>
+                      setFeatures({
+                        ...features,
+                        [e.target.name]: 1,
+                      })
+                    }
+                    className="border-2 bg-gray-800 border-gray-600 p-2 rounded-lg focus:outline-none focus:border-blue-500"
+                  >
                     <option value="Agent">Agent</option>
+                    <option value="Builder">Builder</option>
+                    <option value="Owner">Owner</option>
                   </select>
                 </div>
               </div>
               <div className="group flex justify-between gap-10 w-full">
                 <div className="flex flex-col gap-2 w-full">
                   <label className="text-lg font-bold">Bedroom</label>
-                  <select className="border-2 bg-gray-800 border-gray-600 p-2 rounded-lg focus:outline-none focus:border-blue-500">
+                  <select
+                    value={features.bedroom}
+                    onChange={(e) =>
+                      setFeatures({
+                        ...features,
+                        bedroom: parseInt(e.target.value),
+                      })
+                    }
+                    className="border-2 bg-gray-800 border-gray-600 p-2 rounded-lg focus:outline-none focus:border-blue-500"
+                  >
                     <option value="Select" disabled selected>
                       Select
                     </option>
@@ -197,7 +216,16 @@ export default function Home() {
                 </div>
                 <div className="flex flex-col gap-2 w-full">
                   <label className="text-lg font-bold">Bathroom</label>
-                  <select className="border-2 bg-gray-800 border-gray-600 p-2 rounded-lg focus:outline-none focus:border-blue-500">
+                  <select
+                    value={features.bathroom}
+                    onChange={(e) =>
+                      setFeatures({
+                        ...features,
+                        bathroom: parseInt(e.target.value),
+                      })
+                    }
+                    className="border-2 bg-gray-800 border-gray-600 p-2 rounded-lg focus:outline-none focus:border-blue-500"
+                  >
                     <option value="Select" disabled selected>
                       Select
                     </option>
@@ -221,43 +249,81 @@ export default function Home() {
                     type="number"
                     min={0}
                     placeholder="Area in sqft"
-                    max={100}
+                    max={19000}
                     className="border-2 bg-gray-800 border-gray-600 p-2 rounded-lg focus:outline-none focus:border-blue-500"
+                    value={features.area}
+                    onChange={(e) =>
+                      setFeatures({
+                        ...features,
+                        area: parseFloat(e.target.value),
+                      })
+                    }
                   />
                 </div>
                 <div className="flex flex-col gap-2 w-full">
                   <label className="text-lg font-bold">Furnish Type</label>
-                  <select className="border-2 bg-gray-800 border-gray-600 p-2 rounded-lg focus:outline-none focus:border-blue-500">
+                  <select
+                    onChange={(e) =>
+                      setFeatures({
+                        ...features,
+                        furnish_type: parseInt(e.target.value),
+                      })
+                    }
+                    className="border-2 bg-gray-800 border-gray-600 p-2 rounded-lg focus:outline-none focus:border-blue-500"
+                  >
                     <option value="Select" disabled selected>
                       Select
                     </option>
-                    <option value="Semi-Furnished">Semi-Furnished</option>
-                    <option value="Unfurnished">Unfurnished</option>
-                    <option value="Furnished">Furnished</option>
+                    <option value="1">Semi-Furnished</option>
+                    <option value="2">Unfurnished</option>
+                    <option value="0">Furnished</option>
                   </select>
                 </div>
               </div>
 
-              <div className="flex flex-col gap-2 w-full">
-                <label className="text-lg font-bold">Property Type</label>
-                <select className="border-2 bg-gray-800 border-gray-600 p-2 rounded-lg focus:outline-none focus:border-blue-500">
-                  <option value="Select" disabled selected>
-                    Select
-                  </option>
-                  <option value="Apartment">Apartment</option>
-                  <option value="Independent House">Independent House</option>
-                  <option value="Independent Floor">Independent Floor</option>
-                  <option value="Studio Apartment">Studio Apartment</option>
-                  <option value="Villa">Villa</option>
-                  <option value="Service Apartment">Service Apartment</option>
-                  <option value="Farm House">Farm House</option>
-                  <option value="Penthouse">Penthouse</option>
-                  <option value="Residential Plot">Residential Plot</option>
-                  <option value="Residential House">Residential House</option>
-                  <option value="Residential Apartment">
-                    Residential Apartment
-                  </option>
-                </select>
+              <div className="group flex justify-between gap-10 w-full">
+                <div className="flex flex-col gap-2 w-full">
+                  <label className="text-lg font-bold">Property Type</label>
+                  <select
+                    value={features.property}
+                    onChange={(e) =>
+                      setFeatures({
+                        ...features,
+                        [e.target.name]: 1,
+                      })
+                    }
+                    className="border-2 bg-gray-800 border-gray-600 p-2 rounded-lg focus:outline-none focus:border-blue-500"
+                  >
+                    <option value="Select" disabled selected>
+                      Select
+                    </option>
+                    Apartment Independent Floor Independent House Penthouse
+                    Studio Apartment
+                    <option value="Apartment">Apartment</option>
+                    <option value="Independent House">Independent House</option>
+                    <option value="Independent Floor">Independent Floor</option>
+                    <option value="Penthouse">Penthouse</option>
+                    <option value="Studio Apartment">Studio Apartment</option>
+                  </select>
+                </div>
+                <div className="flex flex-col gap-2 w-full">
+                  <label className="text-lg font-bold">Layout Type</label>
+                  <select
+                    onChange={(e) =>
+                      setFeatures({
+                        ...features,
+                        layout_type: parseInt(e.target.value),
+                      })
+                    }
+                    className="border-2 bg-gray-800 border-gray-600 p-2 rounded-lg focus:outline-none focus:border-blue-500"
+                  >
+                    <option value="Select" disabled selected>
+                      Select
+                    </option>
+                    <option value="1">BHK</option>
+                    <option value="2">RK</option>
+                  </select>
+                </div>
               </div>
               <input
                 type="submit"
