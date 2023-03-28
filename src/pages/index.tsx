@@ -25,8 +25,7 @@ export default function Home() {
     villa: 0,
   });
 
-  const getPredictions = async (e) => {
-    e.preventDefault();
+  const getPredictions = async () => {
     const data = features;
     console.log(features);
     const res = await fetch("http://127.0.0.1:5000", {
@@ -40,11 +39,8 @@ export default function Home() {
     console.log(json);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     // Set all the values properly
-
     // Call getPredictions function
   };
 
