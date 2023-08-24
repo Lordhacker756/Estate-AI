@@ -10,7 +10,6 @@ export default function Home() {
   const [features, setFeatures] = useState({
     bedroom: 0.0,
     layout_type: 0,
-    locality: 0,
     area: 0,
     furnish_type: 0,
     bathroom: 0,
